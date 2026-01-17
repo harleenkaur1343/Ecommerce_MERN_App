@@ -30,7 +30,8 @@ export const register = async (req, res) => {
 
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     const otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
-
+    const hashedOTP = bcrypt.hash(otp.toString(),10);
+    
     //save user
     const user = await Users.create({
       name,
@@ -75,8 +76,8 @@ export const verifyOtp = async (req, res) => {
     if (user.otpExpiry < Date.now()) {
       return res.status(400).json({ message: "OTP has expired" });
     }
-
-    if (user.otp !== otp) {
+    const isValid = await bcrypt.compare(otp,user.otp);
+    if (!isValid) {
       return res.status(400).json({ message: "Invalid OTP" });
     }
 

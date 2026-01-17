@@ -38,6 +38,9 @@ const userSchema = new mongoose.Schema(
     otpExpiry: {
       type: Date,
     },
+    refreshToken:{
+      type:String,
+    }
   },
   { timestamps: true }
 );

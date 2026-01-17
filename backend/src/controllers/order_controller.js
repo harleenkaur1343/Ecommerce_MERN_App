@@ -47,7 +47,7 @@ export const placeOrder = async (req, res) => {
   }
 };
 
-export const getUsersOrders = async (req, res) => {
+export const getUserOrders = async (req, res) => {
   try {
     const getOrder = (await Orders.find({ user: req.user.id })).sort({
       createdAt: -1,

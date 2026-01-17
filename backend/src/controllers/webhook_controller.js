@@ -1,7 +1,7 @@
 import stripe from "../config/stripe.js";
-import Order from "../models/order.model.js";
+import Orders from "../models/order_model.js";
 
-export const stripeWebhook = async (req, res) => {
+const stripeWebhook = async (req, res) => {
   const sig = req.headers["stripe-signature"];
 
   let event;
@@ -22,10 +22,12 @@ export const stripeWebhook = async (req, res) => {
 
     const orderId = paymentIntent.metadata.orderId;
 
-    await Order.findByIdAndUpdate(orderId, {
+    await Orders.findByIdAndUpdate(orderId, {
       paymentStatus: "PAID",
     });
   }
 
   res.json({ received: true });
 };
+
+export default stripeWebhook;

@@ -33,7 +33,10 @@ export const login = async (req, res) => {
       process.env.JWT_REFRESH_SECRET,
       { expiresIn: "7d" }
     );
-    
+
+    user.refreshToken = refreshToken;
+    await user.save();
+
     res.status(200).json({
       message: "Login successful",
       accessToken,
@@ -49,4 +52,11 @@ export const login = async (req, res) => {
     console.error(error);
     res.status(500).json({ message: "Server error" });
   }
+};
+export const logout = async (req, res) => {
+  const { refreshToken } = req.body;
+
+  await Users.findOneAndUpdate({ refreshToken }, { refreshToken: null });
+
+  res.json({ message: "Logged out successfully" });
 };

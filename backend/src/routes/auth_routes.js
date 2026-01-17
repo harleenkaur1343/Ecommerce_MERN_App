@@ -1,4 +1,4 @@
-import express, { request } from "express";
+import express from "express";
 import { register,verifyOtp } from "../controllers/auth_controller.js";
 import {login} from "../controllers/login_controller.js"
 import authmiddleware from "../middleware/auth_middleware.js";
@@ -11,7 +11,7 @@ router.post("/register", register);
 router.post("/verify_otp",verifyOtp);
 router.post("/login",login);
 
-router.get("/protected/admin",authmiddleware,allowedRoles("Admin"),(req,res)=>{
+router.get("/protected/admin",authmiddleware,allowedRoles("ADMIN"),(req,res)=>{
     res.json({message:"Welcome Admin"})
 });
 
