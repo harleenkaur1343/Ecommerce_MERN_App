@@ -8,13 +8,13 @@ import jwt from "jsonwebtoken";
 
 const authmiddleware = (req, res, next) => {
   const tokenauthprt = req.headers.authorization;
-  console.log(tokenauthprt);
+  // console.log(tokenauthprt);
   //check it is tampered or not
   if (!tokenauthprt || !tokenauthprt.startsWith("Bearer")) {
     return res.status(401).json({ message: "No token provided" });
   }
   const token = tokenauthprt.split(" ")[1];
-  console.log("Token: ", token);
+  // console.log("Token: ", token);
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
