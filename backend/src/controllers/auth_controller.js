@@ -30,8 +30,8 @@ export const register = async (req, res) => {
 
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     const otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
-    const hashedOTP = bcrypt.hash(otp.toString(),10);
-    
+    const hashedOTP = bcrypt.hash(otp.toString(), 10);
+
     //save user
     const user = await Users.create({
       name,
@@ -44,7 +44,12 @@ export const register = async (req, res) => {
     await sendEmail(
       email,
       "Verify your account",
-      `Your OTP is ${otp}. It expires in 10 minutes.`
+      `Hi There!, 
+      This email has been sent by NuraSkin to verify your account.
+      Your OTP is ${otp}. It expires in 10 minutes.
+      
+      Regards
+      Harleen`
     );
     res.status(201).json({
       message: "User registered successfully. OTP sent to email.",
@@ -76,7 +81,9 @@ export const verifyOtp = async (req, res) => {
     if (user.otpExpiry < Date.now()) {
       return res.status(400).json({ message: "OTP has expired" });
     }
-    const isValid = await bcrypt.compare(otp,user.otp);
+    //const isValid = await bcrypt.compare(otp, user.otp);
+    const isValid = (otp==user.otp)?true:false;
+    console.log("Is Valid", isValid)
     if (!isValid) {
       return res.status(400).json({ message: "Invalid OTP" });
     }
