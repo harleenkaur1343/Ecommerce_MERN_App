@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import rateLimit from "express-rate-limit";
-
+import cookieParser from "cookie-parser"
 import authRoutes from "../backend/src/routes/auth_routes.js";
 import productRoutes from "../backend/src/routes/product_routes.js";
 import cartRoutes from "../backend/src/routes/cart_routes.js";
@@ -28,6 +28,7 @@ app.use(
     credentials: true,
   })
 );
+app.use(cookieParser());
 
 app.use(express.json());         
 app.use(express.urlencoded({ extended: true }));

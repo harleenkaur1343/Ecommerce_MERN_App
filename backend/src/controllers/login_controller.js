@@ -25,22 +25,27 @@ export const login = async (req, res) => {
     const accessToken = jwt.sign(
       { id: user._id, role: user.role },
       process.env.JWT_SECRET,
-      { expiresIn: "15m" }
+      { expiresIn: "15m" },
     );
     //for
     const refreshToken = jwt.sign(
       { id: user._id },
       process.env.JWT_REFRESH_SECRET,
-      { expiresIn: "7d" }
+      { expiresIn: "7d" },
     );
 
     user.refreshToken = refreshToken;
     await user.save();
 
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true, //so that it cannot be accessed by js
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+      sameSite: "strict", //check for other vals
+      //secure: process.env.NODE_ENV === "production",
+    });
     res.status(200).json({
       message: "Login successful",
       accessToken,
-      refreshToken,
       user: {
         id: user._id,
         name: user.name,
@@ -58,5 +63,12 @@ export const logout = async (req, res) => {
 
   await Users.findOneAndUpdate({ refreshToken }, { refreshToken: null });
 
-  res.json({ message: "Logged out successfully" });
+  //remove the cookie
+  res.clearCookie("refreshToken", {
+    httpOnly: true,
+    //secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+  });
+
+  res.sendStatus(200).json({ message: "Logged out successfully" });
 };

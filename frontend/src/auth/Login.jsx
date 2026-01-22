@@ -7,9 +7,13 @@ import { Button } from "../components/ui/button.jsx";
 import { Input } from "@/components/ui/input.jsx";
 import { Label } from "@/components/ui/label.jsx";
 
+import { useAuth } from "@/context/AuthContext.jsx";
+
 const Login = () => {
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
+
+  const { login } = useAuth();
 
   const handleOnChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -38,9 +42,11 @@ const Login = () => {
 
       const res = await api.post("/auth/login", form);
       //store the token
-      localStorage.setItem("accessToken", res.data.accessToken);
+      localStorage.setItem("refreshToken", res.data.refreshToken);
+      login(res.data.user, res.data.accessToken);
+
       alert(res.data.message);
-    //   console.log("Login", res.data);
+      //   console.log("Login", res.data);
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
       console.log("Login err", err);

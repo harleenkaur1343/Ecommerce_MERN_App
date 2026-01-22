@@ -29,7 +29,7 @@ export const getAllProducts = async (req, res) => {
   try {
     //adding filter by search, category
     const {
-      keyword,
+      search,
       category,
       minPrice,
       maxPrice,
@@ -38,9 +38,10 @@ export const getAllProducts = async (req, res) => {
     } = req.query;
 
     const query = {};
+    //if no params defined then this would be empty {}
 
-    if (keyword) {
-      query.name = { $regex: keyword, $options: "i" }; //find the documents where the nme field contins the work iphone
+    if (search) {
+      query.name = { $regex: search, $options: "i" }; //find the documents where the nme field contins the work iphone
     }
 
     if (category) {

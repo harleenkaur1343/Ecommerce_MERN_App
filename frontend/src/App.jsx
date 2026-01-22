@@ -4,6 +4,7 @@ import "./App.css";
 import Register from "../src/auth/Register";
 import VerifyOTP from "../src/auth/VerifyOTP";
 import Login from "./auth/Login";
+import Products from "./ui_comps/Products";
 
 function App() {
   return (
@@ -12,6 +13,15 @@ function App() {
         <Route path="/register" element={<Register />}></Route>
         <Route path="/otp" element={<VerifyOTP />}></Route>
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/products" element={<Products/>}></Route>
+        {/* <Route
+  path="/admin"
+  element={
+    <ProtectedRoute role="admin">
+      <AdminDashboard />
+    </ProtectedRoute>
+  }
+/> */}
       </Routes>
     </BrowserRouter>
   );
