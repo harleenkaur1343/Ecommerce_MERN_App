@@ -5,6 +5,7 @@ import {
   getAllProducts,
   updateProduct,
   uploadProductImages,
+  getProduct,
 } from "../controllers/product_controller.js";
 import authmiddleware from "../middleware/auth_middleware.js";
 import allowedRoles from "../middleware/role_middleware.js";
@@ -16,7 +17,7 @@ router.post(
   "/createproduct",
   authmiddleware,
   allowedRoles("ADMIN"),
-  createProduct
+  createProduct,
 );
 
 router.post(
@@ -24,10 +25,12 @@ router.post(
   authmiddleware,
   allowedRoles("ADMIN"),
   upload.array("images", 5),
-  uploadProductImages
+  uploadProductImages,
 );
 
 router.get("/products", getAllProducts);
+
+router.get("/:id", getProduct);
 
 router.put("/:id", authmiddleware, allowedRoles("ADMIN"), updateProduct);
 

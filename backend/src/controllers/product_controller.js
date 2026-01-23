@@ -81,6 +81,25 @@ export const getAllProducts = async (req, res) => {
   }
 };
 
+export const getProduct = async (req, res) => {
+  try {
+    const {id} = req.params;
+
+    const product = await Products.findOne({ _id: id });
+
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    res.status(200).json({
+      product,
+    });
+  } catch (error) {
+    console.error("Get a product error:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
 export const updateProduct = async (req, res) => {
   try {
     //product id

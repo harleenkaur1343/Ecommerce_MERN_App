@@ -4,7 +4,8 @@ import "./App.css";
 import Register from "../src/auth/Register";
 import VerifyOTP from "../src/auth/VerifyOTP";
 import Login from "./auth/Login";
-import Products from "./ui_comps/Products";
+import Products from "./pages/Products";
+import ProductDetail from "./pages/ProductDetail";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/otp" element={<VerifyOTP />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/products" element={<Products/>}></Route>
+        <Route path="/product/:id" element={<ProductDetail/>}></Route>
         {/* <Route
   path="/admin"
   element={
