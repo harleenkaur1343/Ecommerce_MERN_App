@@ -42,7 +42,7 @@ app.use("/api/product", productRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/admin", adminOrder_routes);
-app.use("/api/auth", authLimiter);
+//app.use("/api/auth", authLimiter);
 app.use("/api/auth", authRoutes);
 
 export default app;

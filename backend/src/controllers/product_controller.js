@@ -1,9 +1,10 @@
-import { request } from "express";
+
 import Products from "../models/product_model.js";
 import cloudinary from "../config/cloudinary.js";
 
 export const createProduct = async (req, res) => {
   const { name, description, price, stock, category } = req.body;
+  console.log("Inside create a product cont")
 
   try {
     const product = await Products.create({

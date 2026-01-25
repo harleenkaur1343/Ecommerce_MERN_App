@@ -29,7 +29,7 @@ export const login = async (req, res) => {
     );
     //for
     const refreshToken = jwt.sign(
-      { id: user._id },
+      { id: user._id, role: user.role },
       process.env.JWT_REFRESH_SECRET,
       { expiresIn: "7d" },
     );

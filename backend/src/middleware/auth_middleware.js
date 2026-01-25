@@ -19,6 +19,7 @@ const authmiddleware = (req, res, next) => {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.user = decoded;
+    console.log("Access token decoded user", req.user)
     //info - userid n role
     next();
   } catch (error) {

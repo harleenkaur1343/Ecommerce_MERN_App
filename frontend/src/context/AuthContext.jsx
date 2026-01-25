@@ -1,23 +1,23 @@
 import { useContext, createContext, useState, useEffect } from "react";
 import api from "../axios/axios.js";
-import { User } from "lucide-react";
 
-const AuthContext = createContext(); //default value
-
-//creating the authcontext provider for
+const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // Bootstraps auth on page refresh
   const fetchUser = async () => {
     try {
-      const res = await api.get("/auth/refresh-token");
-      setUser(res.data.user);
-      setLoading(false);
+      const res = await api.get("/auth/refresh-token"); // cookie auto sent
+      console.log("Response refresh token in auth req", res);
+      localStorage.setItem("accessToken", res.data.accessToken);
+      if (res.data.userData.id) {
+        setUser(res.data.userData);
+      }
     } catch (err) {
       setUser(null);
-      setLoading(false);
     } finally {
       setLoading(false);
     }
@@ -27,19 +27,15 @@ export const AuthProvider = ({ children }) => {
     fetchUser();
   }, []);
 
-  //functions for setting the user status
-  const login = (userData, token) => {
-    localStorage.setItem("accessToken", token);
-    setUser(userData);
+  const login = (response) => {
+    console.log("User login in", response);
+    localStorage.setItem("accessToken", response.data.accessToken);
+    setUser(response.data.user);
   };
 
   const logout = async () => {
-    const refreshToken = localStorage.getItem("refreshToken");
-
-    await api.post("/auth/logout", { refreshToken });
-
+    const { data } = await api.post("/auth/logout"); // backend clears cookie
     localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
     setUser(null);
   };
 
@@ -50,4 +46,10 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-export const useAuth = () => useContext(AuthContext);
+export const useAuth = () => {
+  const ctx = useContext(AuthContext);
+  if (!ctx) {
+    throw new Error("useAuth must be used inside AuthProvider");
+  }
+  return ctx;
+};

@@ -1,4 +1,5 @@
 import api from "../axios/axios.js";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -14,6 +15,7 @@ const Login = () => {
   const [error, setError] = useState("");
 
   const { login } = useAuth();
+  const navigate = useNavigate();
 
   const handleOnChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -41,11 +43,12 @@ const Login = () => {
       console.log("Inside login handler");
 
       const res = await api.post("/auth/login", form);
-      //store the token
-      localStorage.setItem("refreshToken", res.data.refreshToken);
-      login(res.data.user, res.data.accessToken);
+
+      login(res);
 
       alert(res.data.message);
+      navigate("/products");
+
       //   console.log("Login", res.data);
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
@@ -76,6 +79,16 @@ const Login = () => {
           </div>
 
           <form onSubmit={handleOnSubmit} className="space-y-6">
+            {error && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="p-4 bg-destructive/10 border border-destructive/20 rounded-2xl text-destructive text-sm"
+              >
+                {error}
+              </motion.div>
+            )}
+
             <div className="space-y-2">
               <Label
                 htmlFor="email"
@@ -131,12 +144,11 @@ const Login = () => {
 
           <p className="text-center mt-8 text-sm text-muted-foreground">
             Visiting first time?{" "}
-            <a
-              href="#"
+            <Link to="/register"
               className="text-primary font-bold hover:underline transition-all underline-offset-4"
             >
               Sign Up
-            </a>
+            </Link>
           </p>
         </motion.div>
       </main>

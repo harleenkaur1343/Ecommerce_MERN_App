@@ -12,22 +12,31 @@ router.post("/login", login);
 router.post("/logout", logout);
 
 router.get("/refresh-token", (req, res) => {
-  const refreshToken = req.cookies.refreshToken;
-
-  if (!refreshToken) return res.sendStatus(401);
-  //expired
-
-  //if not then generate the access token
-  //secret, user id
   try {
-    const payload = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
-    const accessToken = jwt.sign({ id: payload._id }, process.env.JWT_SECRET, {
-      expiresIn: "15m",
-    });
+    const refreshToken = req.cookies.refreshToken;
 
-    res.json({
+    if (!refreshToken) return res.sendStatus(401);
+    //expired
+
+    //if not then generate the access token
+    //secret, user id
+
+    const payload = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
+    const accessToken = jwt.sign(
+      { id: payload.id, role: payload.role },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "15m",
+      },
+    );
+    const userData = {
+      id: payload.id,
+      role: payload.role,
+    };
+    console.log("Refresh token created access token");
+    res.status(200).json({
       accessToken,
-      user: payload.user,
+      userData,
     });
   } catch (error) {
     res.sendStatus(401);

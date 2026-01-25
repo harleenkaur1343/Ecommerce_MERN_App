@@ -28,9 +28,9 @@ router.post(
   uploadProductImages,
 );
 
-router.get("/products", getAllProducts);
+router.get("/products",  authmiddleware, getAllProducts);
 
-router.get("/:id", getProduct);
+router.get("/:id",  authmiddleware, getProduct);
 
 router.put("/:id", authmiddleware, allowedRoles("ADMIN"), updateProduct);
 
