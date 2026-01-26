@@ -39,9 +39,9 @@ function App() {
         <Route
           path="/admin/products/add"
           element={
-            // <AdminRoute>
+            <AdminRoute>
             <AddProduct></AddProduct>
-            // </AdminRoute>
+            </AdminRoute>
           }
         />
       </Routes>

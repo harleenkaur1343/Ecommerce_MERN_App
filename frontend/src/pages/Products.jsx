@@ -40,7 +40,7 @@ const Products = () => {
           minPrice,
           maxPrice,
           page,
-          limit: 10,
+          limit: 12,
         },
       });
 

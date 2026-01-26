@@ -8,14 +8,14 @@ import { request } from "express";
 
 const allowedRoles = (...allowedRoles) => {
   return (req, res, next) => {
-    console.log("request cp", req)
+    //console.log("request cp", req)
     if (!req.user || !req.user.role)
       return res.status(401).json({ message: "Not autorized" });
 
     if (!allowedRoles.includes(req.user.role)) {
       return res.status(403).json({ message: "Access denied" });
     }
-    console.log("passing through role middleware for create product");
+    //console.log("passing through role middleware for create product");
     next();
   };
 };

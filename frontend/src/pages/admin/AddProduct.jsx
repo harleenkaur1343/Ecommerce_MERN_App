@@ -91,7 +91,7 @@ const AddProduct = () => {
     const formData = new FormData();
 
     if (image) {
-      formData.append("image", image);
+      formData.append("images", image);
     }
     formData.forEach((value, key) => {
       console.log(key, value);
@@ -106,9 +106,9 @@ const AddProduct = () => {
       );
       console.log("Product created:", data.product);
       const id = data.product._id;
-      await api.post(`/product/uploadimage/${id}`,formData)
+      await api.post(`/product/uploadimage/${id}`, formData);
       alert(data.message);
-      navigate("/admin/products");
+      navigate("/products");
     } catch (error) {
       console.error("Add product error:", error);
     } finally {
@@ -307,7 +307,7 @@ const AddProduct = () => {
             <Button
               type="button"
               variant="outline"
-              onClick={() => navigate("/admin/products")}
+              onClick={() => navigate("/products")}
               className="w-full h-12 rounded-full border-primary/50 hover:bg-primary/5 text-foreground font-medium transition-all"
             >
               Cancel

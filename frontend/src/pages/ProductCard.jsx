@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
 export function ProductCard({ product }) {
-  console.log("Product,", product._id);
+  console.log("Product,", product);
   return (
     <div className="group relative bg-card rounded-3xl overflow-hidden border border-border/50 hover:border-primary/20 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5">
       {/* Image Area - Aspect Square to match 1:1 generated images */}
@@ -22,7 +22,7 @@ export function ProductCard({ product }) {
 
         <Link to={`/product/${product._id}`}>
           <img
-            src={product.image}
+            src={product?.images?.[0]?.url}
             alt={product.name}
             className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 cursor-pointer"
           />
@@ -49,7 +49,7 @@ export function ProductCard({ product }) {
         </Link>
         <div className="flex items-center justify-between">
           <span className="font-bold text-xl text-foreground">
-            ${product.price.toFixed(2)}
+            Rs.{product.price.toFixed(2)}
           </span>
           <div className="flex items-center gap-1">
             <div className="w-2 h-2 rounded-full bg-slate-800 ring-1 ring-offset-1 ring-slate-200"></div>

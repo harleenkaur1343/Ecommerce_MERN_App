@@ -7,7 +7,7 @@ const AdminRoute = ({children}) => {
 
     if(loading) return null;
 
-    return user?.role === "ADMIN"? children:<Navigate to="/"/>
+    return user?.role === "ADMIN"? children:<Navigate to="/products"/>
 }
 
 export default AdminRoute;

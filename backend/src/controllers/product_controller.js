@@ -165,7 +165,7 @@ export const uploadProductImages = async (req, res) => {
         //uploading to cloudinary n then getting the public id n the url
 
         cloudinary.v2.uploader
-          .upload_upstream({ folder: "products" }, (error, result) => {
+          .upload_stream({ folder: "products" }, (error, result) => {
             if (error) reject(error);
             else resolve(result);
           })
