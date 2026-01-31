@@ -87,7 +87,7 @@ const ProductDetail = () => {
           >
             <div className="aspect-square bg-white rounded-[3rem] overflow-hidden border border-primary/5 shadow-2xl shadow-primary/5 group">
               <img
-                src={product.image}
+                src={product?.images?.[0]?.url}
                 alt={product.name}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
@@ -140,7 +140,7 @@ const ProductDetail = () => {
                 </span>
               </div>
               <p className="text-3xl font-display font-bold text-foreground mt-4">
-                ${product.price.toFixed(2)}
+                Rs. {product.price.toFixed(2)}
               </p>
             </div>
 
@@ -153,16 +153,18 @@ const ProductDetail = () => {
                 <div className="flex items-center bg-secondary/50 rounded-full p-1 border border-primary/5">
                   <button
                     onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                    className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-white transition-colors"
+                    className="rounded-full w-10 h-10 flex items-center justify-center"
                   >
-                    <Minus className="w-4 h-4" />
+                    {/* Lucide icons have flex-shrink:1 by default, when buttons are rounded have animations background changes etc their width can go to zero, hence using shrink-0 when using flex for this  */}
+                    {/* For >1 icons add in button className="... [&_svg]:shrink-0"> */}
+                    <Minus className="w-4 h-4 shrink-0" />
                   </button>
                   <span className="w-12 text-center font-bold">{quantity}</span>
                   <button
                     onClick={() => setQuantity((q) => q + 1)}
                     className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-white transition-colors"
                   >
-                    <Plus className="w-4 h-4" />
+                    <Plus className="w-4 h-4 shrink-0" />
                   </button>
                 </div>
                 <Button

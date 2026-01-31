@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export function ProductCard({ product }) {
   console.log("Product,", product);
   return (
-    <div className="group relative bg-card rounded-3xl overflow-hidden border border-border/50 hover:border-primary/20 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5">
+    <div className="group relative bg-card rounded-3xl overflow-hidden border border-border/50 shadow-sm hover:border-primary/20 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5">
       {/* Image Area - Aspect Square to match 1:1 generated images */}
       <div className="relative aspect-square bg-secondary/30 overflow-hidden group-hover:bg-secondary/50 transition-colors">
         <div className="absolute top-4 right-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col gap-2">
@@ -49,7 +49,7 @@ export function ProductCard({ product }) {
         </Link>
         <div className="flex items-center justify-between">
           <span className="font-bold text-xl text-foreground">
-            Rs.{product.price.toFixed(2)}
+            Rs. {product.price.toFixed(2)}
           </span>
           <div className="flex items-center gap-1">
             <div className="w-2 h-2 rounded-full bg-slate-800 ring-1 ring-offset-1 ring-slate-200"></div>
