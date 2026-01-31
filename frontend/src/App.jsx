@@ -13,7 +13,7 @@ import { useAuth } from "./context/AuthContext";
 
 function App() {
   const { user } = useAuth();
-  console.log("User in app.jsx", user);
+  //console.log("User in app.jsx", user);
   return (
     <BrowserRouter>
       <Routes>
@@ -40,7 +40,7 @@ function App() {
           path="/admin/products/add"
           element={
             <AdminRoute>
-            <AddProduct></AddProduct>
+              <AddProduct></AddProduct>
             </AdminRoute>
           }
         />

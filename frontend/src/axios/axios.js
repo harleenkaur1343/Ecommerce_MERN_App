@@ -9,7 +9,7 @@ const api = axios.create({
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("accessToken");
-    console.log("Authorizaton axios: request interceptor", config);
+    //console.log("Authorizaton axios: request interceptor", config);
     if (token) {
       //Add the header
       config.headers.Authorization = `Bearer ${token}`;
@@ -22,42 +22,12 @@ api.interceptors.request.use(
   },
 );
 
-/* RESPONSE INTERCEPTOR FROM BACKEND*/
-// api.interceptors.response.use(
-//   (response) => response,
-//   async (error) => {
-//     const originalRequest = error.config;
-
-//     if (error.response?.status === 401 && !originalRequest._retry) {
-//       originalRequest._retry = true;
-
-//       try {
-//         const res = await api.post("/auth/refresh-token");
-//         localStorage.setItem("accessToken from axios", res.data.accessToken);
-//         console.log(
-//           "Authorizaton axios: response interceptor",
-//           res.data.accessToken,
-//         );
-
-//         originalRequest.headers.Authorization = `Bearer ${res.data.accessToken}`;
-
-//         return api(originalRequest);
-//       } catch (err) {
-//         localStorage.removeItem("accessToken");
-//         console.log("Response interceptor error".replace, err);
-//         window.location.href = "/login";
-//       }
-//     }
-
-//     return Promise.reject(error);
-//   },
-// );
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
 
-    // 🚫 Prevent infinite loop
+    // Prevent infinite loop
     if (originalRequest.url.includes("/auth/refresh-token")) {
       return Promise.reject(error);
     }

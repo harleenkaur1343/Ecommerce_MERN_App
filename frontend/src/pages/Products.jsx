@@ -110,7 +110,7 @@ const Products = () => {
                   <label className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground ml-1">
                     Category
                   </label>
-                  {/* <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2">
                     {categories.map((cat) => (
                       <button
                         key={cat}
@@ -124,7 +124,7 @@ const Products = () => {
                         {cat}
                       </button>
                     ))}
-                  </div> */}
+                  </div>
                 </div>
 
                 {/* Price Range */}

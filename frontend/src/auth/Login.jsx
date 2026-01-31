@@ -1,6 +1,6 @@
 import api from "../axios/axios.js";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { User, Mail, Lock, ArrowRight, Sparkles } from "lucide-react";
@@ -14,7 +14,7 @@ const Login = () => {
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
 
-  const { login } = useAuth();
+  const { login, user } = useAuth();
   const navigate = useNavigate();
 
   const handleOnChange = (e) => {
@@ -55,6 +55,14 @@ const Login = () => {
       console.log("Login err", err);
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      navigate("/products");
+    }
+  }, [user]);
+
+  
   return (
     <div className="min-h-screen bg-background">
       {/* <Navbar /> */}
@@ -144,7 +152,8 @@ const Login = () => {
 
           <p className="text-center mt-8 text-sm text-muted-foreground">
             Visiting first time?{" "}
-            <Link to="/register"
+            <Link
+              to="/register"
               className="text-primary font-bold hover:underline transition-all underline-offset-4"
             >
               Sign Up

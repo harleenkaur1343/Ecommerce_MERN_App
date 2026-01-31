@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
 export function ProductCard({ product }) {
-  console.log("Product,", product);
+  
   return (
     <div className="group relative bg-card rounded-3xl overflow-hidden border border-border/50 shadow-sm hover:border-primary/20 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5">
       {/* Image Area - Aspect Square to match 1:1 generated images */}
