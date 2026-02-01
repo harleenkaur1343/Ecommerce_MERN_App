@@ -13,6 +13,7 @@ import {
   SlidersHorizontal,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Navbar } from "./Navbar.jsx";
 
 const Products = () => {
   //variables
@@ -54,16 +55,16 @@ const Products = () => {
       setLoading(false);
     }
   };
-  useEffect(() => {
-    console.log("Category", category);
-  }, [category]);
+  // useEffect(() => {
+  //   console.log("Category", category);
+  // }, [category]);
   useEffect(() => {
     fetchProducts();
   }, [search, minPrice, maxPrice, category, page]);
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans">
-      {/* <Navbar></Navbar> */}
+      <Navbar></Navbar>
       <main className="container mx-auto px-4 py-8 md:py-12">
         {/* header n search bar */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">

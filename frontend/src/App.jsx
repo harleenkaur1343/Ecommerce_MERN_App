@@ -11,11 +11,13 @@ import AddProduct from "./pages/admin/AddProduct";
 import Logout from "./auth/Logout";
 import { useAuth } from "./context/AuthContext";
 
+
 function App() {
   const { user } = useAuth();
   //console.log("User in app.jsx", user);
   return (
     <BrowserRouter>
+  
       <Routes>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/otp" element={<VerifyOTP />}></Route>
