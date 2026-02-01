@@ -10,14 +10,14 @@ import AdminRoute from "./pages/admin/AdminRoute";
 import AddProduct from "./pages/admin/AddProduct";
 import Logout from "./auth/Logout";
 import { useAuth } from "./context/AuthContext";
-
+import Home from "./pages/Home";
+import TrendingSection from "./pages/TrendingSection";
 
 function App() {
   const { user } = useAuth();
   //console.log("User in app.jsx", user);
   return (
     <BrowserRouter>
-  
       <Routes>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/otp" element={<VerifyOTP />}></Route>
@@ -30,6 +30,8 @@ function App() {
         <Route path="/product/:id" element={<ProductDetail />}></Route>
         <Route path="/products" element={<Products />}></Route>
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/trend" element={<TrendingSection/>}></Route>
         {/* <Route
   path="/admin"
   element={

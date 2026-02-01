@@ -13,7 +13,7 @@ import {
   SlidersHorizontal,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Navbar } from "./Navbar.jsx";
+import Navbar from "./Navbar.jsx";
 
 const Products = () => {
   //variables
@@ -49,7 +49,7 @@ const Products = () => {
       setPages(data.pages);
       setLoading(false);
       //also have the page and the total products in the query
-    } catch (err) {
+    } catch (error) {
       console.error("Fetch products error:", error);
     } finally {
       setLoading(false);

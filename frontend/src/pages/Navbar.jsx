@@ -1,10 +1,10 @@
 import { Link, useLocation } from "react-router-dom";
-import { Search, ShoppingBag, Menu, User, Sparkle } from "lucide-react";
+import { ShoppingBag, Menu, User, Sparkle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 
-export function Navbar() {
+function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { user } = useAuth();
   const location = useLocation();
@@ -88,3 +88,4 @@ export function Navbar() {
     </nav>
   );
 }
+export default Navbar;
