@@ -8,13 +8,17 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { user } = useAuth();
   const location = useLocation();
-
+  const isAdmin = user?.role === "ADMIN";
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "Shop", href: "/products" },
+    isAdmin && { name: "Dashboard", href: "/admin" },
     !user && { name: "Log In", href: "/login" },
     !user && { name: "Sign Up", href: "/register" },
-  ];
+  ].filter(Boolean);
+  // (5) [{…}, {…}, {…}, false, false]
+
+  console.log("Navlinks", navLinks);
 
   return (
     <nav className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur-md border-b border-primary/5 shadow-md shadow-primary/5">

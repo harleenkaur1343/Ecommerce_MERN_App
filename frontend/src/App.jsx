@@ -12,6 +12,8 @@ import Logout from "./auth/Logout";
 import { useAuth } from "./context/AuthContext";
 import Home from "./pages/Home";
 import TrendingSection from "./pages/TrendingSection";
+import AdminProducts from "./pages/admin/AdminProducts";
+import AdminDashboard from "./pages/admin/AdminDashboard";
 
 function App() {
   const { user } = useAuth();
@@ -31,23 +33,23 @@ function App() {
         <Route path="/products" element={<Products />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/" element={<Home />}></Route>
-        <Route path="/trend" element={<TrendingSection/>}></Route>
-        {/* <Route
-  path="/admin"
-  element={
-    <ProtectedRoute role="admin">
-      <AdminDashboard />
-    </ProtectedRoute>
-  }
-/> */}
-        <Route
-          path="/admin/products/add"
-          element={
-            <AdminRoute>
-              <AddProduct></AddProduct>
-            </AdminRoute>
-          }
-        />
+        <Route path="/trend" element={<TrendingSection />}></Route>
+        {/* <Route element={<AdminRoute />}>
+          <Route path="/admin/products" element={<AdminProducts />} />
+          <Route path="/admin/products/add" element={<AddProduct />} />
+          <Route path="/admin" element={<AdminDashboard />} />
+        </Route> */}
+        <Route element={<AdminRoute />}>
+          {/* AdminDashboard is the layout wrapper with sidebar */}
+          <Route path="/admin" element={<AdminDashboard />}>
+            {/* These routes render INSIDE AdminDashboard's <Outlet /> */}
+            {/* <Route index element={<AdminOverview />} /> */}
+            <Route path="products" element={<AdminProducts />} />
+            <Route path="products/add" element={<AddProduct />} />
+            {/* <Route path="products/edit/:id" element={<EditProduct />} />
+            <Route path="orders" element={<AdminOrders />} /> */}
+          </Route>
+        </Route>
       </Routes>
     </BrowserRouter>
   );

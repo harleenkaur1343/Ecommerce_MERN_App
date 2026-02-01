@@ -195,13 +195,6 @@ const Products = () => {
             <p className="text-xl font-display font-bold text-muted-foreground">
               No products found for this search.
             </p>
-            {/* <Button
-              variant="link"
-              onClick={() => setCategory("")}
-              className="mt-2 text-primary"
-            >
-              View all products
-            </Button> */}
           </div>
         )}
 

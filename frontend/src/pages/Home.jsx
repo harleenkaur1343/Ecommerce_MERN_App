@@ -22,7 +22,7 @@ function Home() {
               {/* Branding Logo */}
               <div className="font-display font-bold text-2xl tracking-tighter flex items-center gap-2">
                 <span className="bg-primary text-primary-foreground w-8 h-8 rounded-lg flex items-center justify-center text-lg">
-                  L
+                  N
                 </span>
                 NuraSkin
               </div>
