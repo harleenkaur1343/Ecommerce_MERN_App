@@ -54,9 +54,9 @@ const Products = () => {
       setLoading(false);
     }
   };
-  // useEffect(() => {
-  //   setSearch("");
-  // }, []);
+  useEffect(() => {
+    console.log("Category", category);
+  }, [category]);
   useEffect(() => {
     fetchProducts();
   }, [search, minPrice, maxPrice, category, page]);
@@ -111,7 +111,13 @@ const Products = () => {
                     Category
                   </label>
                   <div className="flex flex-wrap gap-2">
-                    {categories.map((cat) => (
+                    {[
+                      "serum",
+                      "cleanser",
+                      "toner",
+                      "sunscreen",
+                      "moisturizer",
+                    ].map((cat) => (
                       <button
                         key={cat}
                         onClick={() => setCategory(cat === category ? "" : cat)}
