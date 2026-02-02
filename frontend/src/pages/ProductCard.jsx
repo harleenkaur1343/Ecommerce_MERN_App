@@ -1,9 +1,20 @@
 import { Heart, ShoppingCart, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import api from "@/axios/axios";
 
 export function ProductCard({ product }) {
-  
+  const handleAddToCart = async () => {
+    try {
+    const {data} = await api.post("/cart/", {
+      productId: product._id,
+      quantity:1
+    })
+    console.log("Added Item", data.cart);
+    } catch (err) {
+      console.log("Error addimg to cart",err)
+    }
+  };
   return (
     <div className="group relative bg-card rounded-3xl overflow-hidden border border-border/50 shadow-sm hover:border-primary/20 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5">
       {/* Image Area - Aspect Square to match 1:1 generated images */}
@@ -30,7 +41,10 @@ export function ProductCard({ product }) {
 
         {/* Quick Add Button */}
         <div className="absolute bottom-4 left-4 right-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 opacity-0 group-hover:opacity-100">
-          <Button className="w-full rounded-full bg-white/90 text-foreground hover:bg-primary hover:text-white shadow-lg backdrop-blur-sm transition-all font-semibold cursor-pointer">
+          <Button
+            onClick={handleAddToCart}
+            className="w-full rounded-full bg-white/90 text-foreground hover:bg-primary hover:text-white shadow-lg backdrop-blur-sm transition-all font-semibold cursor-pointer"
+          >
             <ShoppingCart className="w-4 h-4 mr-2" />
             Add to Cart
           </Button>

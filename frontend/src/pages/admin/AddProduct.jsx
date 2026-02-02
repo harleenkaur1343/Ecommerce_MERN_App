@@ -117,7 +117,7 @@ const AddProduct = () => {
   };
   return (
     <div className="min-h-screen bg-background">
-      <main className="container w-full lg:w-1/2 mx-auto px-4 py-16 flex items-center justify-center">
+      <main className="container w-full mx-auto px-4 py-16 flex items-center justify-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -307,7 +307,7 @@ const AddProduct = () => {
             <Button
               type="button"
               variant="outline"
-              onClick={() => navigate("/products")}
+              onClick={() => navigate("/admin/products")}
               className="w-full h-12 rounded-full border-primary/50 hover:bg-primary/5 text-foreground font-medium transition-all"
             >
               Cancel

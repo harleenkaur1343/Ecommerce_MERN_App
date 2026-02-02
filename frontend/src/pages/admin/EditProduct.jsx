@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import api from "@/axios/axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button.jsx";
 import { Input } from "@/components/ui/input.jsx";
@@ -26,8 +26,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-const AddProduct = () => {
+const EditProduct = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
 
   const [form, setForm] = useState({
     name: "",
@@ -36,10 +37,43 @@ const AddProduct = () => {
     description: "",
     category: "",
   });
-  const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
+  const [existingImage, setExistingImage] = useState([]);
   const [error, setError] = useState(null);
+
+  //fetch the product
+
+  useEffect(() => {
+    fetchProduct();
+  }, [id]);
+
+  const fetchProduct = async () => {
+    try {
+      setLoading(true);
+      // Use the correct endpoint - adjust based on your API
+      const { data } = await api.get(`/product/${id}`);
+      const { name, price, stock, description, category } = data.product;
+      //   console.log("DATA EDIT", data);
+      setForm((prev) => ({
+        name,
+        price,
+        stock,
+        description,
+        category,
+      }));
+      setExistingImage(data.images);
+
+      //setExistingImage(data.image);
+    } catch (error) {
+      console.error("Error fetching product:", error);
+      setError("Failed to load product");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -60,6 +94,7 @@ const AddProduct = () => {
   const handleOnChange = (e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -93,22 +128,24 @@ const AddProduct = () => {
     if (image) {
       formData.append("images", image);
     }
-    formData.forEach((value, key) => {
-      console.log(key, value);
-    });
+    // formData.forEach((value, key) => {
+    //   console.log(key, value);
+    // });
 
     try {
+      const url = `/product/${id}`;
+      console.log("ID", id);
       setLoading(true);
-      const { data } = await api.post(
-        "/product/createproduct",
+      const { data } = await api.put(
+        url,
         form,
         // headers: { "Content-Type": "multipart/form-data" },
       );
-      console.log("Product created:", data.product);
-      const id = data.product._id;
+      console.log("Product edited:", data.product);
+
       await api.post(`/product/uploadimage/${id}`, formData);
       alert(data.message);
-      navigate("/products");
+      navigate("/admin/products");
     } catch (error) {
       console.error("Add product error:", error);
     } finally {
@@ -117,7 +154,7 @@ const AddProduct = () => {
   };
   return (
     <div className="min-h-screen bg-background">
-      <main className="container w-full lg:w-1/2 mx-auto px-4 py-16 flex items-center justify-center">
+      <main className="container w-full mx-auto px-4 py-16 flex items-center justify-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -130,7 +167,7 @@ const AddProduct = () => {
               <Sparkles className="w-8 h-8 text-primary"></Sparkles>
             </div>
             <h2 className="text-foreground mb-3 font-bold font-display text-2xl">
-              Add Product
+              Edit Product
             </h2>
           </div>
 
@@ -307,7 +344,7 @@ const AddProduct = () => {
             <Button
               type="button"
               variant="outline"
-              onClick={() => navigate("/products")}
+              onClick={() => navigate("/admin/products")}
               className="w-full h-12 rounded-full border-primary/50 hover:bg-primary/5 text-foreground font-medium transition-all"
             >
               Cancel
@@ -319,4 +356,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default EditProduct;

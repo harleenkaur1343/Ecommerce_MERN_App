@@ -124,9 +124,9 @@ export const updateProduct = async (req, res) => {
   }
 };
 
-export const deleteProduct = async () => {
+export const deleteProduct = async (req, res) => {
   try {
-    const id = req.params;
+    const {id} = req.params;
     const product = await Products.findById(id);
 
     if (!product) {

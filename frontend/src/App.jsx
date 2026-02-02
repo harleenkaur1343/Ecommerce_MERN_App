@@ -14,6 +14,7 @@ import Home from "./pages/Home";
 import TrendingSection from "./pages/TrendingSection";
 import AdminProducts from "./pages/admin/AdminProducts";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import EditProduct from "./pages/admin/EditProduct";
 
 function App() {
   const { user } = useAuth();
@@ -46,8 +47,8 @@ function App() {
             {/* <Route index element={<AdminOverview />} /> */}
             <Route path="products" element={<AdminProducts />} />
             <Route path="products/add" element={<AddProduct />} />
-            {/* <Route path="products/edit/:id" element={<EditProduct />} />
-            <Route path="orders" element={<AdminOrders />} /> */}
+            <Route path="products/edit/:id" element={<EditProduct />} />
+            {/* <Route path="orders" element={<AdminOrders />} /> */}
           </Route>
         </Route>
       </Routes>
