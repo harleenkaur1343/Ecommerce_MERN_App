@@ -26,6 +26,9 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     fetchUser();
   }, []);
+    useEffect(() => {
+    console.log("User after logging put",user);
+  }, [user]);
 
   const login = (response) => {
     // console.log("User login in", response);
@@ -37,6 +40,7 @@ export const AuthProvider = ({ children }) => {
     const { data } = await api.post("/auth/logout"); // backend clears cookie
     localStorage.removeItem("accessToken");
     setUser(null);
+    
   };
 
   return (

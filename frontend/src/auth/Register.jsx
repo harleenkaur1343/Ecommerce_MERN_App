@@ -1,14 +1,13 @@
 import api from "../axios/axios.js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { User, Mail, Lock, ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "../components/ui/button.jsx";
 import { Input } from "@/components/ui/input.jsx";
 import { Label } from "@/components/ui/label.jsx";
-
-//import { Navbar } from "@/components/layout/Navbar";
-
+import Navbar from "@/pages/Navbar.jsx";
+import { useAuth } from "@/context/AuthContext.jsx";
 const Register = () => {
   const [form, setForm] = useState({
     name: "",
@@ -17,6 +16,15 @@ const Register = () => {
   });
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+const {user,loading} = useAuth();
+
+  useEffect(()=>{
+    if(user && !loading)
+    {
+      navigate("/products");
+    }
+  },[])
+  
   const handleOnChange = (e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     //console.log("Updated form", form);
@@ -58,7 +66,7 @@ const Register = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* <Navbar /> */}
+      <Navbar />
 
       <main className="container mx-auto px-4 py-16 flex items-center justify-center">
         <motion.div

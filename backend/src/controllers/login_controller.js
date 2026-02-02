@@ -66,8 +66,8 @@ export const logout = async (req, res) => {
   //remove the cookie
   res.clearCookie("refreshToken", {
     httpOnly: true,
-    //secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
+    secure: true,
+    sameSite: "none",
   });
 
   res.sendStatus(200).json({ message: "Logged out successfully" });

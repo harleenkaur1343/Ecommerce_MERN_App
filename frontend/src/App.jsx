@@ -16,6 +16,7 @@ import AdminProducts from "./pages/admin/AdminProducts";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import EditProduct from "./pages/admin/EditProduct";
 import Cart from "./pages/Cart";
+import ProtectedRoute from "./auth/ProtectedRoute";
 
 function App() {
   const { user } = useAuth();
@@ -23,21 +24,32 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/register" element={<Register />}></Route>
-        <Route path="/otp" element={<VerifyOTP />}></Route>
-        <Route path="/logout" element={<Logout />}></Route>
-        {user ? (
-          <Route path="/products" element={<Products />}></Route>
-        ) : (
-          <Route path="/login" element={<Login />}></Route>
-        )}
-        <Route path="/product/:id" element={<ProductDetail />}></Route>
-        <Route path="/products" element={<Products />}></Route>
-        <Route path="/login" element={<Login />}></Route>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/otp" element={<VerifyOTP />} />
+        <Route path="/logout" element={<Logout />} />
 
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/cart" element={<Cart />}></Route>
-        <Route path="/trend" element={<TrendingSection />}></Route>
+        <Route
+          path="/products"
+          element={
+            <ProtectedRoute>
+              <Products />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/cart"
+          element={
+            <ProtectedRoute>
+              <Cart />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route path="/product/:id" element={<ProductDetail />} />       
+    
         {/* <Route element={<AdminRoute />}>
           <Route path="/admin/products" element={<AdminProducts />} />
           <Route path="/admin/products/add" element={<AddProduct />} />

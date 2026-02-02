@@ -3,8 +3,10 @@ import { ArrowRight, Leaf, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import heroImage from '../../assets/images/premium_organic_facial_serum_bottle.png';
+import { useNavigate } from "react-router-dom";
 
 function Hero() {
+
   return (
     <section className="relative overflow-hidden bg-background pt-8 pb-10 md:pt-16 md:pb-10">
       <div className="container mx-auto px-4 md:px-6">
@@ -34,10 +36,10 @@ function Hero() {
             </p>
             
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-2">
-              <Button size="lg" className="rounded-full px-10 h-14 text-base font-semibold bg-primary hover:bg-primary/90 shadow-xl shadow-primary/20 transition-all hover:scale-105">
+              <Button onClick = {()=>Navigate("/products")} size="lg" className="rounded-full px-10 h-14 text-base font-semibold bg-primary hover:bg-primary/90 shadow-xl shadow-primary/20 transition-all hover:scale-105">
                 Discover the Collection
               </Button>
-              <Button variant="link" size="lg" className="h-14 text-foreground font-semibold group">
+              <Button onClick = {()=>Navigate("/products")} variant="link" size="lg" className="h-14 text-foreground font-semibold group">
                 Our Rituals <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Button>
             </div>

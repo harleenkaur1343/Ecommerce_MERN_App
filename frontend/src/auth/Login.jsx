@@ -7,7 +7,7 @@ import { User, Mail, Lock, ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "../components/ui/button.jsx";
 import { Input } from "@/components/ui/input.jsx";
 import { Label } from "@/components/ui/label.jsx";
-
+import Navbar from "@/pages/Navbar.jsx";
 import { useAuth } from "@/context/AuthContext.jsx";
 
 const Login = () => {
@@ -65,7 +65,7 @@ const Login = () => {
   
   return (
     <div className="min-h-screen bg-background">
-      {/* <Navbar /> */}
+      <Navbar />
 
       <main className="container mx-auto px-4 py-16 flex items-center justify-center">
         <motion.div

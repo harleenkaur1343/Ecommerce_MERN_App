@@ -19,17 +19,17 @@ const AdminDashboard = () => {
   const navigate = useNavigate();
   const { logout } = useAuth();
 
-  const handleLogout = () => {
-    logout();
-    navigate("/login");
+  const handleLogout =  () => {
+    
+    navigate("/logout");
   };
 
   const navItems = [
-    {
-      name: "Overview",
-      path: "/admin",
-      icon: LayoutDashboard,
-    },
+    // {
+    //   name: "Overview",
+    //   path: "/admin",
+    //   icon: LayoutDashboard,
+    // },
     {
       name: "Products",
       path: "/admin/products",
@@ -43,9 +43,9 @@ const AdminDashboard = () => {
   ];
 
   const isActive = (path) => {
-    if (path === "/admin") {
-      return location.pathname === "/admin";
-    }
+    // if (path === "/admin") {
+    //   return location.pathname === "/admin";
+    // }
     return location.pathname.startsWith(path);
   };
 
