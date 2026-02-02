@@ -93,9 +93,9 @@ const AddProduct = () => {
     if (image) {
       formData.append("images", image);
     }
-    formData.forEach((value, key) => {
-      console.log(key, value);
-    });
+    // formData.forEach((value, key) => {
+    //   console.log(key, value);
+    // });
 
     try {
       setLoading(true);
@@ -104,7 +104,7 @@ const AddProduct = () => {
         form,
         // headers: { "Content-Type": "multipart/form-data" },
       );
-      console.log("Product created:", data.product);
+      //console.log("Product created:", data.product);
       const id = data.product._id;
       await api.post(`/product/uploadimage/${id}`, formData);
       alert(data.message);

@@ -40,7 +40,7 @@ const Login = () => {
     }
 
     try {
-      console.log("Inside login handler");
+      //console.log("Inside login handler");
 
       const res = await api.post("/auth/login", form);
 

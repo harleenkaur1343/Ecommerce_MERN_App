@@ -32,7 +32,7 @@ const ProductDetail = () => {
       try {
         const res = await api.get(`/product/${id}`);
 
-        console.log("The product:", res.data.product);
+        //console.log("The product:", res.data.product);
         setProduct(res.data.product);
       } catch (err) {
         console.error(err);
@@ -124,20 +124,20 @@ const ProductDetail = () => {
                 {product.name}
               </h1>
               <div className="flex items-center gap-4">
-                <div className="flex items-center text-yellow-500">
+                {/* <div className="flex items-center text-yellow-500">
                   {[...Array(5)].map((_, i) => (
                     <Star
                       key={i}
                       className={`w-4 h-4 ${i < Math.floor(product.rating) ? "fill-current" : ""}`}
                     />
                   ))}
-                </div>
-                <span className="text-sm text-muted-foreground">
+                </div> */}
+                {/* <span className="text-sm text-muted-foreground">
                   ({product.rating} / 5.0)
                 </span>
                 <span className="text-sm text-primary font-bold underline underline-offset-4">
                   124 Reviews
-                </span>
+                </span> */}
               </div>
               <p className="text-3xl font-display font-bold text-foreground mt-4">
                 Rs. {product.price.toFixed(2)}

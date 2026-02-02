@@ -19,12 +19,12 @@ const Register = () => {
   const navigate = useNavigate();
   const handleOnChange = (e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    console.log("Updated form", form);
+    //console.log("Updated form", form);
   };
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    console.log("Registering user:", form);
+    //console.log("Registering user:", form);
 
     //reset previous errors
     setError("");
@@ -48,11 +48,11 @@ const Register = () => {
     try {
       const { data } = await api.post("/auth/register", form);
       navigate("/otp", { state: { email: form.email } });
-      console.log("Regestration success", data);
+      //console.log("Regestration success", data);
       alert(data.message);
     } catch (err) {
       setError(err.response?.data?.message || "Registration failed");
-      console.log("Register error", err);
+      //console.log("Register error", err);
     }
   };
 

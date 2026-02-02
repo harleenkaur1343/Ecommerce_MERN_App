@@ -113,7 +113,7 @@ const AdminProducts = () => {
       </div>
     );
   }
-console.log("Products",products)
+//console.log("Products",products)
   return (
     <div className="space-y-8">
       {/* Header */}

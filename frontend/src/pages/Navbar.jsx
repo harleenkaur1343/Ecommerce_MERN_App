@@ -18,6 +18,7 @@ function Navbar() {
     isAdmin && { name: "Dashboard", href: "/admin" },
     !user && { name: "Log In", href: "/login" },
     !user && { name: "Sign Up", href: "/register" },
+    user && {name:"Logout",href:"/logout"}
   ].filter(Boolean);
   // (5) [{…}, {…}, {…}, false, false]
 

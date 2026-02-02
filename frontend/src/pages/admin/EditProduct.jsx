@@ -134,14 +134,14 @@ const EditProduct = () => {
 
     try {
       const url = `/product/${id}`;
-      console.log("ID", id);
+      
       setLoading(true);
       const { data } = await api.put(
         url,
         form,
         // headers: { "Content-Type": "multipart/form-data" },
       );
-      console.log("Product edited:", data.product);
+      //conle.log("Product edited:", data.product);
 
       await api.post(`/product/uploadimage/${id}`, formData);
       alert(data.message);

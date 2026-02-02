@@ -15,7 +15,7 @@ const AdminProducts = () => {
       const { data } = await api.get("/product/products", {
         params: { page, limit: 10 },
       });
-      console.log("View all products", data);
+      //console.log("View all products", data);
       setProducts(data.products);
       setPages(data.pages);
     } catch (err) {
@@ -34,7 +34,7 @@ const AdminProducts = () => {
       await api.delete(`/product/${id}`);
       fetchProducts();
     } catch (err) {
-      console.log("Delete product error:", err);
+      //console.log("Delete product error:", err);
     }
   };
 

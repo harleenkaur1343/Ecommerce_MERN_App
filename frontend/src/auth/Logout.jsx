@@ -3,17 +3,19 @@ import { useAuth } from "@/context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { LogOut, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 const Logout = () => {
   const { logout } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Call logout when component mounts
-    logout();
-    
-  }, [logout]);
+    const handleLogout = async () => {
+      await logout();
+      //navigate("/login");
+    };
+
+    handleLogout();
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">
@@ -47,13 +49,6 @@ const Logout = () => {
             </Link>
           </div>
 
-          {/* <Button
-            onClick={() => navigate("/login")}
-            className="w-full h-14 rounded-full bg-primary hover:bg-primary/90 text-white font-bold text-base shadow-lg shadow-primary/20 transition-all hover:scale-[1.02] active:scale-[0.98]"
-          >
-            Return to Login
-            <ArrowRight className="ml-2 w-5 h-5" />
-          </Button> */}
         </motion.div>
       </main>
     </div>
