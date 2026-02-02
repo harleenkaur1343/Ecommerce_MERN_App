@@ -3,12 +3,15 @@ import { ShoppingBag, Menu, User, Sparkle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
+import { useCart } from "@/context/CartContext";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { user } = useAuth();
   const location = useLocation();
+  const {cart} = useCart();
   const isAdmin = user?.role === "ADMIN";
+
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "Shop", href: "/products" },
@@ -17,8 +20,6 @@ function Navbar() {
     !user && { name: "Sign Up", href: "/register" },
   ].filter(Boolean);
   // (5) [{…}, {…}, {…}, false, false]
-
-  console.log("Navlinks", navLinks);
 
   return (
     <nav className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur-md border-b border-primary/5 shadow-md shadow-primary/5">
@@ -57,12 +58,12 @@ function Navbar() {
             <User className="w-5 h-5" />
           </button>
 
-          <button className="p-2.5 bg-primary text-primary-foreground rounded-full hover:opacity-90 transition-all relative cursor-pointer shadow-lg shadow-primary/20">
+          <Link to ="/cart"className="p-2.5 bg-primary text-primary-foreground rounded-full hover:opacity-90 transition-all relative cursor-pointer shadow-lg shadow-primary/20">
             <ShoppingBag className="w-4 h-4" />
             <span className="absolute -top-1 -right-1 w-4 h-4 bg-foreground text-background text-[9px] flex items-center justify-center rounded-full font-black">
-              2
+              {cart.length}
             </span>
-          </button>
+          </Link>
 
           <button
             className="md:hidden p-2.5 hover:bg-primary/5 rounded-full text-foreground/80 cursor-pointer"

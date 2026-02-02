@@ -42,7 +42,7 @@ export const addCartItem = async (req, res) => {
     //returning the cart so as to refresh the UI for added items
     res.status(200).json({ message: "Added item to cart", cart });
   } catch (error) {
-    console.log("Add items error, error");
+    console.log("Add items error,", error);
     res.status(500).json({ message: "Server error" });
   }
 };
@@ -53,28 +53,9 @@ export const getCartItems = async (req, res) => {
     const userCart = await Cart.findOne({ user: req.user.id }).populate(
       "items.product"
     );
-    //populate is a mongoose level fucnton which replace the object for each product n injects the document associated with ecah
-    //     {
-    //   "items": [
-    //     { "product": "64abc...", "quantity": 2 }
-    //   ]
-    //     // }
-    //     {
-    //   "items": [
-    //     {
-    //       "product": {
-    //         "_id": "64abc...",
-    //         "name": "Shoes",
-    //         "price": 2999
-    //       },
-    //       "quantity": 2
-    //     }
-    //   ]
-    // }
-
     res.status(200).json(userCart || { items: [] });
   } catch (error) {
-    console.log("Add items error, error");
+    console.log("Add items error,", error);
     res.status(500).json({ message: "Server error" });
   }
 };
@@ -85,20 +66,20 @@ export const removeCartItem = async (req, res) => {
     //retain all except the one to be deleetd
     const { productId } = req.params;
 
-    const userCart = await Cart.findOne({ user: req.user.id });
-    if (!userCart) return res.status(404).json({ message: "Cart not found" });
+    const cart = await Cart.findOne({ user: req.user.id });
+    if (!cart) return res.status(404).json({ message: "Cart not found" });
 
     //if exists
     //modify the items array for user
-    userCart.items = userCart.items.filter(
+    cart.items = cart.items.filter(
       (item) => item.product.toString() != productId
     );
 
-    await userCart.save();
+    await cart.save();
 
     res.status(200).json({ message: "Item removed", cart });
   } catch (error) {
-    console.log("Add items error, error");
+    console.log("Delete items error,", error);
     res.status(500).json({ message: "Server error" });
   }
 };

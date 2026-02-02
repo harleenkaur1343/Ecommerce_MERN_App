@@ -1,19 +1,12 @@
 import { Heart, ShoppingCart, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import api from "@/axios/axios";
+import { useCart } from "@/context/CartContext";
 
 export function ProductCard({ product }) {
+ const { error, addToCart } = useCart();
   const handleAddToCart = async () => {
-    try {
-    const {data} = await api.post("/cart/", {
-      productId: product._id,
-      quantity:1
-    })
-    console.log("Added Item", data.cart);
-    } catch (err) {
-      console.log("Error addimg to cart",err)
-    }
+    await addToCart(product._id, 1);
   };
   return (
     <div className="group relative bg-card rounded-3xl overflow-hidden border border-border/50 shadow-sm hover:border-primary/20 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5">
