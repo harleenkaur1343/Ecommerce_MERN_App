@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: `${import.meta.env.VITE_API_URL}/api`,
   withCredentials: true,
 });
 
@@ -36,7 +36,7 @@ api.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
-        const res = await api.post("/auth/refresh-token");
+        const res = await api.get("/auth/refresh-token");
 
         localStorage.setItem("accessToken", res.data.accessToken);
 
@@ -47,7 +47,7 @@ api.interceptors.response.use(
       } catch (err) {
         localStorage.removeItem("accessToken");
         console.log("Interceptor error", err)
-        window.location.href = "/login";
+        //window.location.href = "/login";
       }
     }
 
