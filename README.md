@@ -53,131 +53,6 @@ nuraSkin embodies a warm, botanical aesthetic:
 }
 ```
 
-```
-nuraSkin/
-├── src/
-│   ├── components/
-│   │   ├── ui/               # shadcn/ui components
-│   │   ├── Navbar.jsx
-│   │   ├── ProductCard.jsx
-│   │   └── ...
-│   ├── pages/
-│   │   ├── auth/
-│   │   │   ├── Register.jsx
-│   │   │   ├── Login.jsx
-│   │   │   ├── OTP.jsx
-│   │   │   └── Logout.jsx
-│   │   ├── admin/
-│   │   │   ├── AdminDashboard.jsx
-│   │   │   ├── AdminOverview.jsx
-│   │   │   ├── AdminProducts.jsx
-│   │   │   ├── AdminOrders.jsx
-│   │   │   ├── AddProduct.jsx
-│   │   │   └── EditProduct.jsx
-│   │   ├── Products.jsx
-│   │   ├── Checkout.jsx
-│   │   └── ...
-│   ├── context/
-│   │   ├── AuthContext.jsx
-│   │   └── CartContext.jsx
-│   ├── axios/
-│   │   └── axios.js         # API configuration
-│   └── App.jsx
-├── backend/
-│   ├── models/
-│   │   ├── user_model.js
-│   │   ├── product_model.js
-│   │   ├── order_model.js
-│   │   └── cart_model.js
-│   ├── routes/
-│   │   ├── auth_routes.js
-│   │   ├── product_routes.js
-│   │   ├── order_routes.js
-│   │   ├── cart_routes.js
-│   │   └── payment_routes.js
-│   ├── controllers/
-│   ├── middleware/
-│   │   └── auth_middleware.js
-│   ├── config/
-│   │   └── stripe.js
-│   └── server.js
-└── README.md
-``` -->
-
-## Getting Started
-
-### Prerequisites
-- Node.js (v16 or higher)
-- MongoDB (local or Atlas)
-- Stripe Account (for payments)
-- npm or yarn
-
-
-1. **Clone the repository**
-```bash
-git clone https://github.com/harleenkaur1343/Ecommerce_MERN_App.git
-cd nuraskin
-```
-
-2. **Install frontend dependencies**
-```bash
-npm install
-```
-
-3. **Install backend dependencies**
-```bash
-cd backend
-npm install
-```
-
-4. **Set up environment variables**
-
-Create `.env` in the root directory:
-```env
-# Frontend
-REACT_APP_STRIPE_PUBLISHABLE_KEY=pk_test_your_publishable_key
-```
-
-Create `.env` in the backend directory:
-```env
-# Database
-MONGO_URI=mongodb://localhost:27017/nuraskin
-# or for MongoDB Atlas:
-# MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/nuraskin
-
-# JWT
-JWT_SECRET=your_jwt_secret_key_here
-JWT_REFRESH_SECRET=your_refresh_secret_key_here
-
-# Stripe
-STRIPE_SECRET_KEY=sk_test_your_secret_key
-
-# Email (for OTP)
-EMAIL_SERVICE=gmail
-EMAIL_USER=your-email@gmail.com
-EMAIL_PASSWORD=your-app-password
-
-# Server
-PORT=5000
-```
-
-5. **Run the development servers**
-
-Backend:
-```bash
-cd backend
-npm run dev
-```
-
-Frontend (in a new terminal):
-```bash
-npm run dev
-```
-
-6. **Access the application**
-- Frontend: `http://localhost:5173`
-- Backend API: `http://localhost:5000` -->
-
 ## API Endpoints
 
 ### Authentication
@@ -216,18 +91,7 @@ PUT    /api/orders/:id/status  - Update order status (Admin)
 ```
 POST   /api/payment/create-intent  - Create Stripe payment intent
 ```
-<!-- 
-## 💳 Payment Testing -->
-<!-- 
-Use these Stripe test cards:
 
-| Card Number         | Result    |
-|---------------------|-----------|
-| 4242 4242 4242 4242 | ✅ Success |
-| 4000 0000 0000 9995 | ❌ Declined|
-
-- Expiry: Any future date (e.g., 12/34)
-- CVC: Any 3 digits (e.g., 123) -->
 
 ## Key Features Implementation
 
@@ -263,27 +127,6 @@ Beautiful admin panel with product management, order tracking, and analytics.
 - **Touch Friendly** - Proper hit targets and interactions
 
 
-<!-- 
-## Deployment
-
-### Frontend (Vercel/Netlify)
-```bash
-npm run build
-# Deploy the 'dist' folder
-```
-
-### Backend (Heroku/Railway/Render)
-```bash
-# Set environment variables in platform dashboard
-# Deploy from GitHub repository
-```
-
-### Environment Variables for Production
-Remember to update:
-- Stripe keys (live keys)
-- MongoDB URI (production database)
-- JWT secrets (strong, random strings)
-- Frontend API URL -->
 
 
 
