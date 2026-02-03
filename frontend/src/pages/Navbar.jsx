@@ -55,9 +55,9 @@ function Navbar() {
             <Search className="w-5 h-5" />
           </button> */}
 
-          <button className="p-2.5 hover:bg-primary/5 rounded-full transition-colors text-foreground/80 cursor-pointer">
+          {/* <button className="p-2.5 hover:bg-primary/5 rounded-full transition-colors text-foreground/80 cursor-pointer">
             <User className="w-5 h-5" />
-          </button>
+          </button> */}
 
           <Link to ="/cart"className="p-2.5 bg-primary text-primary-foreground rounded-full hover:opacity-90 transition-all relative cursor-pointer shadow-lg shadow-primary/20">
             <ShoppingBag className="w-4 h-4" />
