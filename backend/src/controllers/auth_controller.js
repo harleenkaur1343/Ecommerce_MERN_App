@@ -4,7 +4,7 @@ import sendEmail from "../utils/send_email.js";
 
 export const register = async (req, res) => {
   try {
-    console.log(req.body);
+    //console.log(req.body);
     const { name, email, password } = req.body;
 
     //check if alredy exists then throw error
@@ -44,8 +44,7 @@ export const register = async (req, res) => {
     await sendEmail(
       email,
       "Verify your account",
-      `Hi There!, 
-      This email has been sent by NuraSkin to verify your account.
+      `Hi There!, This email has been sent by NuraSkin to verify your account.
       Your OTP is ${otp}. It expires in 10 minutes.
       
       Regards
