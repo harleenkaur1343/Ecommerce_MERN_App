@@ -53,8 +53,6 @@ nuraSkin embodies a warm, botanical aesthetic:
 }
 ```
 
-<!-- ##  Project Structure
-
 ```
 nuraSkin/
 ├── src/
@@ -114,7 +112,6 @@ nuraSkin/
 - Stripe Account (for payments)
 - npm or yarn
 
-<!-- ### Installation
 
 1. **Clone the repository**
 ```bash
