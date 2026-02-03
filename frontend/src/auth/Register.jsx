@@ -16,15 +16,14 @@ const Register = () => {
   });
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-const {user,loading} = useAuth();
+  const { user, loading } = useAuth();
 
-  useEffect(()=>{
-    if(user && !loading)
-    {
+  useEffect(() => {
+    if (user && !loading) {
       navigate("/products");
     }
-  },[])
-  
+  }, []);
+
   const handleOnChange = (e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     //console.log("Updated form", form);
@@ -172,6 +171,14 @@ const {user,loading} = useAuth();
               Sign In
             </a>
           </p>
+          {error && (
+            <motion.p
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="p-4 my-4 text-center bg-destructive/10 border border-destructive/20 rounded-2xl text-destructive text-sm"
+            >{error}
+            </motion.p>
+          )}
         </motion.div>
       </main>
     </div>
