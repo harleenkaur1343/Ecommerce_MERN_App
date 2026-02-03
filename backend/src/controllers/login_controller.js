@@ -63,9 +63,7 @@ export const logout = async (req, res) => {
   // const { refreshToken } = req.body;
 
   const refreshToken = req.cookies.refreshToken;
-  console.log("Refhresh cookie",refreshToken);
-
-
+ 
   await Users.findOneAndUpdate({ refreshToken }, { refreshToken: null });
 
   //remove the cookie
@@ -74,6 +72,6 @@ export const logout = async (req, res) => {
     secure: true,
     sameSite: "none",
   });
-  console.log("After clearing", req.cookies.refreshToken);
+ 
   res.status(200).json({ message: "Logged out noe successfully" });
 };
