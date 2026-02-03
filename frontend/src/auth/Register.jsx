@@ -55,7 +55,7 @@ const Register = () => {
     try {
       const { data } = await api.post("/auth/register", form);
       navigate("/otp", { state: { email: form.email } });
-      console.log("Regestration success", data);
+      //console.log("Regestration success", data);
       alert(data.message);
     } catch (err) {
       setError(err.response?.data?.message || "Registration failed");
