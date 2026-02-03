@@ -1,6 +1,6 @@
 import express from "express";
-import { register, verifyOtp, logout } from "../controllers/auth_controller.js";
-import { login } from "../controllers/login_controller.js";
+import { register, verifyOtp} from "../controllers/auth_controller.js";
+import { login, logout } from "../controllers/login_controller.js";
 import authmiddleware from "../middleware/auth_middleware.js";
 import allowedRoles from "../middleware/role_middleware.js";
 import jwt from "jsonwebtoken";

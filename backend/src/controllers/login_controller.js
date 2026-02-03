@@ -59,7 +59,12 @@ export const login = async (req, res) => {
   }
 };
 export const logout = async (req, res) => {
-  const { refreshToken } = req.body;
+  //undefined
+  // const { refreshToken } = req.body;
+
+  const refreshToken = req.cookies.refreshToken;
+  console.log("Refhresh cookie",refreshToken);
+
 
   await Users.findOneAndUpdate({ refreshToken }, { refreshToken: null });
 
@@ -69,6 +74,6 @@ export const logout = async (req, res) => {
     secure: true,
     sameSite: "none",
   });
-
-  res.sendStatus(200).json({ message: "Logged out successfully" });
+  console.log("After clearing", req.cookies.refreshToken);
+  res.status(200).json({ message: "Logged out noe successfully" });
 };

@@ -100,17 +100,4 @@ export const verifyOtp = async (req, res) => {
   }
 };
 
-export const logout = async (req, res) => {
-  const refreshToken  = req.cookies.refreshToken;
 
-  if (!refreshToken) {
-    return res.status(400).json({ message: "Refresh token required" });
-  }
-
-  await Users.findOneAndUpdate(
-    { refreshToken },
-    { refreshToken: null }
-  );
-
-  res.json({ message: "Logged out successfully" });
-};

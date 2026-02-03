@@ -38,6 +38,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     const { data } = await api.post("/auth/logout"); // backend clears cookie
+    console.log("LOGOUT",data)
     localStorage.removeItem("accessToken");
     setUser(null);
     
