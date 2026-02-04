@@ -56,7 +56,8 @@ export const register = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error:error, message: "In register controller - Server error" });
+    res.status(500).json({ error:error.message, message: "In register controller - Server error" });
+    //sending only error in json strips the content inside
   }
 };
 
