@@ -12,9 +12,9 @@ export const login = async (req, res) => {
       return res.status(404).json({ message: "Invalid credentials" });
     }
 
-    if (!user.isVerified) {
-      return res.status(401).json({ message: "Please verify your account" });
-    }
+    // if (!user.isVerified) {
+    //   return res.status(401).json({ message: "Please verify your account" });
+    // }
 
     const isMatch = await bcrypt.compare(password, user.password);
 

@@ -17,7 +17,7 @@ const Register = () => {
   const [error, setError] = useState(null);
   const [pageLoading, setPageLoading] = useState(false);
   const navigate = useNavigate();
-  const { user, loading } = useAuth();
+  const { user, loading, register } = useAuth();
 
   useEffect(() => {
     if (user && !loading) {
@@ -55,15 +55,17 @@ const Register = () => {
     }
     //form submission here
     try {
-      const { data } = await api.post("/auth/register", form);
-      navigate("/otp", { state: { email: form.email } });
-      alert(data.message);
+      const res = await api.post("/auth/register", form);
+      // navigate("/otp", { state: { email: form.email } });
+      register(res);
+      alert(res.data.message);
+      navigate("/products");
       setPageLoading(false);
     } catch (err) {
       setError(err.response?.data?.message || "Registration failed");
       console.log("Register error", err);
       setPageLoading(false);
-    }finally{
+    } finally {
       setPageLoading(false);
     }
   };

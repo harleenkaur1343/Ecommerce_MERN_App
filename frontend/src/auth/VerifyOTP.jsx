@@ -15,11 +15,24 @@ const VerifyOTP = () => {
   const [otp, setOtp] = useState("");
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [resendLoading, setResendLoading] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
   const email = location.state?.email;
-  
+
+  const handleResendOTP = async (e) => {
+    setResendLoading(true);
+    try {
+      const { data } = await api.post("/auth/resend-otp", { email });
+      alert(data?.message);
+      setResendLoading(false);
+    } catch (err) {
+      setError(err?.response?.data?.message || "OTP verfication failed");
+      setResendLoading(false);
+      console.log("Error in fetching OTP", err);
+    }
+  };
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
@@ -115,7 +128,7 @@ const VerifyOTP = () => {
 
             <Button
               type="submit"
-              disabled={otp.length !== 6 || isLoading}
+              disabled={otp.length !== 6 || isLoading || resendLoading}
               className="w-full h-14 rounded-full bg-primary hover:bg-primary/90 text-white font-bold text-base shadow-xl shadow-primary/20 transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:hover:scale-100"
             >
               {isLoading ? (
@@ -132,7 +145,10 @@ const VerifyOTP = () => {
           <div className="mt-10 pt-8 border-t border-primary/5">
             <p className="text-sm text-muted-foreground">
               Didn't receive the code?{" "}
-              <button className="text-primary font-bold hover:underline underline-offset-4 cursor-pointer">
+              <button
+                onClick={handleResendOTP}
+                className="text-primary font-bold hover:underline underline-offset-4 cursor-pointer"
+              >
                 Resend Code
               </button>
             </p>

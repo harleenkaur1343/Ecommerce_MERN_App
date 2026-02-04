@@ -36,6 +36,11 @@ export const AuthProvider = ({ children }) => {
     setUser(response.data.user);
   };
 
+  const register = (response) =>{
+    localStorage.setItem("accessToken", response.data.accessToken);
+    setUser(response.data.user);
+  }
+
   const logout = async () => {
     const { data } = await api.post("/auth/logout"); // backend clears cookie
     console.log("LOGOUT",data)
@@ -45,7 +50,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading }}>
+    <AuthContext.Provider value={{ user, login, logout, loading, register }}>
       {children}
     </AuthContext.Provider>
   );

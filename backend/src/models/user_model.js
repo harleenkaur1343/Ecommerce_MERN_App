@@ -26,18 +26,7 @@ const userSchema = new mongoose.Schema(
       default: "USER",
     },
 
-    isVerified: {
-      type: Boolean,
-      default: false,
-    },
-
-    otp: {
-      type: String,
-    },
-
-    otpExpiry: {
-      type: Date,
-    },
+  
     refreshToken:{
       type:String,
     }
@@ -46,3 +35,16 @@ const userSchema = new mongoose.Schema(
 );
 
 export default mongoose.model("Users", userSchema);
+
+ // otp: {
+    //   type: String,
+    // },
+
+    // otpExpiry: {
+    //   type: Date,
+    // },
+    // isVerified: {
+    //   type: Boolean,
+    //   default: false,
+    // },
+
