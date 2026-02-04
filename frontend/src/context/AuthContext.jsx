@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
     fetchUser();
   }, []);
     useEffect(() => {
-    console.log("User after logging put",user);
+    //console.log("User after logging put",user);
   }, [user]);
 
   const login = (response) => {
@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     const { data } = await api.post("/auth/logout"); // backend clears cookie
-    console.log("LOGOUT",data)
+    //console.log("LOGOUT",data)
     localStorage.removeItem("accessToken");
     setUser(null);
     

@@ -30,7 +30,7 @@ const VerifyOTP = () => {
     } catch (err) {
       setError(err?.response?.data?.message || "OTP verfication failed");
       setResendLoading(false);
-      console.log("Error in fetching OTP", err);
+      //console.log("Error in fetching OTP", err);
     }
   };
 
