@@ -17,7 +17,7 @@ const connectDB = async () => {
       // This forces Node.js to use IPv4 instead of the Google IPv6 address you saw
       family: 4 
     });
-    console.log(`MongoDB Connected: ${conn.connection.host}`);
+   // console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
     console.error(`Error: ${error.message}`);
     process.exit(1);

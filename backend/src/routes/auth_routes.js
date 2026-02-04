@@ -31,7 +31,7 @@ router.get("/refresh-token", (req, res) => {
       id: payload.id,
       role: payload.role,
     };
-    console.log("Refresh token created access token");
+   //console.log( "Refresh token created access token");
     res.status(200).json({
       accessToken,
       userData,

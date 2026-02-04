@@ -10,7 +10,7 @@ apiInstance.setApiKey(
 
 const sendEmail = async (to, subject, html) => {
   try {
-    console.log("BREVO KEY EXISTS:", !!process.env.BREVO_OTP_KEY);
+    
 
     await apiInstance.sendTransacEmail({
       sender: {
@@ -22,7 +22,7 @@ const sendEmail = async (to, subject, html) => {
       htmlContent: html,
     });
 
-    console.log("Brevo email sent");
+    // console.log("Brevo email sent");
   } catch (error) {
     console.error("Brevo email error:", error.response?.body || error);
     throw error;

@@ -55,7 +55,7 @@ export const getCartItems = async (req, res) => {
     );
     res.status(200).json(userCart || { items: [] });
   } catch (error) {
-    console.log("Add items error,", error);
+    console.log("GET items error,", error);
     res.status(500).json({ message: "Server error" });
   }
 };
