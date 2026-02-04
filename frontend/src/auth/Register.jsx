@@ -15,6 +15,7 @@ const Register = () => {
     password: "",
   });
   const [error, setError] = useState(null);
+  const [pageLoading, setPageLoading] = useState(false);
   const navigate = useNavigate();
   const { user, loading } = useAuth();
 
@@ -35,6 +36,7 @@ const Register = () => {
 
     //reset previous errors
     setError("");
+    setPageLoading(true);
 
     //form validation here
     if (!form.name || !form.email || !form.password) {
@@ -55,11 +57,14 @@ const Register = () => {
     try {
       const { data } = await api.post("/auth/register", form);
       navigate("/otp", { state: { email: form.email } });
-      //console.log("Regestration success", data);
       alert(data.message);
+      setPageLoading(false);
     } catch (err) {
       setError(err.response?.data?.message || "Registration failed");
       console.log("Register error", err);
+      setPageLoading(false);
+    }finally{
+      setPageLoading(false);
     }
   };
 
@@ -155,6 +160,7 @@ const Register = () => {
 
             <Button
               type="submit"
+              disabled={pageLoading}
               className="w-full h-14 rounded-full bg-primary hover:bg-primary/90 text-white font-bold text-base shadow-lg shadow-primary/20 transition-all hover:scale-[1.02] active:scale-[0.98] mt-4"
             >
               Start My Journey
@@ -176,7 +182,8 @@ const Register = () => {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               className="p-4 my-4 text-center bg-destructive/10 border border-destructive/20 rounded-2xl text-destructive text-sm"
-            >{error}
+            >
+              {error}
             </motion.p>
           )}
         </motion.div>

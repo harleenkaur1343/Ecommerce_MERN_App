@@ -14,7 +14,7 @@ const Login = () => {
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
 
-  const { login, user } = useAuth();
+  const { login, user, loading } = useAuth();
   const navigate = useNavigate();
 
   const handleOnChange = (e) => {
@@ -143,6 +143,7 @@ const Login = () => {
 
             <Button
               type="submit"
+              disabled={loading}
               className="w-full h-14 rounded-full bg-primary hover:bg-primary/90 text-white font-bold text-base shadow-lg shadow-primary/20 transition-all hover:scale-[1.02] active:scale-[0.98] mt-4"
             >
               Login
