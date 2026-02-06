@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import rateLimit from "express-rate-limit";
-import cookieParser from "cookie-parser"
+import cookieParser from "cookie-parser";
 import authRoutes from "../backend/src/routes/auth_routes.js";
 import productRoutes from "../backend/src/routes/product_routes.js";
 import cartRoutes from "../backend/src/routes/cart_routes.js";
@@ -20,17 +20,17 @@ const app = express();
 app.post(
   "/api/webhook/stripe",
   express.raw({ type: "application/json" }),
-  stripeWebhook
+  stripeWebhook,
 );
 app.use(
   cors({
     origin: process.env.CLIENT_URL,
     credentials: true,
-  })
+  }),
 );
 app.use(cookieParser());
 
-app.use(express.json());         
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/api/", (req, res) => {
@@ -42,7 +42,7 @@ app.use("/api/product", productRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/admin", adminOrder_routes);
-//app.use("/api/auth", authLimiter);
+app.use("/api/auth", authLimiter);
 app.use("/api/auth", authRoutes);
 
 export default app;
