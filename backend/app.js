@@ -11,8 +11,8 @@ import adminOrder_routes from "../backend/src/routes/adminOrder_routes.js";
 import stripeWebhook from "../backend/src/controllers/webhook_controller.js";
 
 const authLimiter = rateLimit({
-  windowMs: 10 * 60 * 1000,
-  max: 5, //5 attempts in 10 minutes
+  windowMs: 5 * 60 * 1000,
+  max: 5, //5 attempts in 5 minutes
   message: "Too many attempts. Please try later",
 });
 const app = express();
