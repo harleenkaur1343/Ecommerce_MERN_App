@@ -55,11 +55,13 @@ const Products = () => {
       setLoading(false);
     }
   };
-  // useEffect(() => {
-  //   console.log("Category", category);
-  // }, [category]);
+
   useEffect(() => {
-    fetchProducts();
+    //adding time delay (pause - for searching)
+    setTimeout(() => {
+      fetchProducts();
+      console.log("In fetchProducts");
+    }, 500);
   }, [search, minPrice, maxPrice, category, page]);
 
   return (

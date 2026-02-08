@@ -1,9 +1,11 @@
 import { Heart, ShoppingCart, Eye } from "lucide-react";
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useCart } from "@/context/CartContext";
+import { lazy } from "react";
 
-export function ProductCard({ product }) {
+export const ProductCard = React.memo(({ product }) => {
  const { error, addToCart } = useCart();
   const handleAddToCart = async () => {
     await addToCart(product._id, 1);
@@ -28,6 +30,7 @@ export function ProductCard({ product }) {
           <img
             src={product?.images?.[0]?.url}
             alt={product.name}
+            loading="lazy"
             className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 cursor-pointer"
           />
         </Link>
@@ -67,4 +70,4 @@ export function ProductCard({ product }) {
       </div>
     </div>
   );
-}
+});

@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import jwt from "jsonwebtoken";
 import rateLimit from "express-rate-limit";
 import cookieParser from "cookie-parser";
 import authRoutes from "../backend/src/routes/auth_routes.js";
@@ -9,13 +10,15 @@ import orderRoutes from "../backend/src/routes/order_routes.js";
 import paymentRoutes from "../backend/src/routes/payment_routes.js";
 import adminOrder_routes from "../backend/src/routes/adminOrder_routes.js";
 import stripeWebhook from "../backend/src/controllers/webhook_controller.js";
+import refreshRoutes from "../backend/src/routes/refreshRoutes.js";
 
 const authLimiter = rateLimit({
-  windowMs: 5 * 60 * 1000,
-  max: 5, //5 attempts in 5 minutes
+  windowMs: 1 * 60 * 1000,
+  max: 5, //10 attempts in  minute
   message: "Too many attempts. Please try later",
 });
 const app = express();
+
 //Stripe requires raw request body for signature verification. Using express.json beforehand alters the body and invalidates the signature
 app.post(
   "/api/webhook/stripe",
@@ -44,5 +47,6 @@ app.use("/api/orders", orderRoutes);
 app.use("/api/admin", adminOrder_routes);
 app.use("/api/auth", authLimiter);
 app.use("/api/auth", authRoutes);
+app.use("/api/refresh", refreshRoutes);
 
 export default app;

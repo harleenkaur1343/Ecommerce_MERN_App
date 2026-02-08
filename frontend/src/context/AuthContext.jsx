@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
   // Bootstraps auth on page refresh
   const fetchUser = async () => {
     try {
-      const res = await api.get("/auth/refresh-token"); // cookie auto sent
+      const res = await api.get("/refresh/refresh-token"); // cookie auto sent
       //console.log("Response refresh token in auth req", res);
       localStorage.setItem("accessToken", res.data.accessToken);
       if (res.data.userData.id) {

@@ -28,7 +28,7 @@ api.interceptors.response.use(
     const originalRequest = error.config;
 
     // Prevent infinite loop
-    if (originalRequest.url.includes("/auth/refresh-token")) {
+    if (originalRequest.url.includes("/refresh/refresh-token")) {
       return Promise.reject(error);
     }
 
@@ -36,7 +36,7 @@ api.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
-        const res = await api.get("/auth/refresh-token");
+        const res = await api.get("/refresh/refresh-token");
 
         localStorage.setItem("accessToken", res.data.accessToken);
 

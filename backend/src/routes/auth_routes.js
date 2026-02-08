@@ -3,7 +3,6 @@ import { register} from "../controllers/auth_controller.js";
 import { login, logout } from "../controllers/login_controller.js";
 import authmiddleware from "../middleware/auth_middleware.js";
 import allowedRoles from "../middleware/role_middleware.js";
-import jwt from "jsonwebtoken";
 const router = express.Router();
 
 router.post("/register", register);
@@ -12,34 +11,7 @@ router.post("/register", register);
 router.post("/login", login);
 router.post("/logout", logout);
 
-router.get("/refresh-token", (req, res) => {
-  try {
-    const refreshToken = req.cookies.refreshToken;
-
-    if (!refreshToken) return res.sendStatus(401);
-
-
-    const payload = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET);
-    const accessToken = jwt.sign(
-      { id: payload.id, role: payload.role },
-      process.env.JWT_SECRET,
-      {
-        expiresIn: "15m",
-      },
-    );
-    const userData = {
-      id: payload.id,
-      role: payload.role,
-    };
-   //console.log( "Refresh token created access token");
-    res.status(200).json({
-      accessToken,
-      userData,
-    });
-  } catch (error) {
-    res.sendStatus(401);
-  }
-});
+// router.get("/refresh-token", );
 
 router.get(
   "/protected/admin",
