@@ -28,7 +28,7 @@ api.interceptors.response.use(
     const originalRequest = error.config;
 
     // Prevent infinite loop
-    if (originalRequest.url.includes("/refresh/refresh-token")) {
+    if (originalRequest.url.includes("/refresh/")) {
       return Promise.reject(error);
     }
 
@@ -36,7 +36,7 @@ api.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
-        const res = await api.get("/refresh/refresh-token");
+        const res = await api.get("/refresh/");
 
         localStorage.setItem("accessToken", res.data.accessToken);
 
@@ -47,7 +47,7 @@ api.interceptors.response.use(
       } catch (err) {
         localStorage.removeItem("accessToken");
         console.log("Interceptor error", err)
-        //window.location.href = "/login";
+        window.location.href = "/login";
       }
     }
 

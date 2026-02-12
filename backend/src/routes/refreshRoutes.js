@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 
 const router = express.Router();
 
-router.get("/refresh-token", (req, res) => {
+router.get("/", (req, res) => {
   try {
     const refreshToken = req.cookies.refreshToken;
 
@@ -21,7 +21,7 @@ router.get("/refresh-token", (req, res) => {
       id: payload.id,
       role: payload.role,
     };
-    //console.log( "Refresh token created access token");
+    console.log( "Refresh token created access token");
     res.status(200).json({
       accessToken,
       userData,

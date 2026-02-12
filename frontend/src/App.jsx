@@ -17,7 +17,7 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import EditProduct from "./pages/admin/EditProduct";
 import Cart from "./pages/Cart";
 import ProtectedRoute from "./auth/ProtectedRoute";
-
+import CheckoutForm from "./pages/Checkout";
 function App() {
   const { user } = useAuth();
   //console.log("User in app.jsx", user);
@@ -48,8 +48,17 @@ function App() {
           }
         />
 
-        <Route path="/product/:id" element={<ProductDetail />} />       
-    
+        <Route
+          path="/checkout"
+          element={
+            <ProtectedRoute>
+              <CheckoutForm />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route path="/product/:id" element={<ProductDetail />} />
+
         {/* <Route element={<AdminRoute />}>
           <Route path="/admin/products" element={<AdminProducts />} />
           <Route path="/admin/products/add" element={<AddProduct />} />

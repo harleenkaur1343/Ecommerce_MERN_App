@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
   // Bootstraps auth on page refresh
   const fetchUser = async () => {
     try {
-      const res = await api.get("/refresh/refresh-token"); // cookie auto sent
+      const res = await api.get("/refresh/"); // cookie auto sent
       //console.log("Response refresh token in auth req", res);
       localStorage.setItem("accessToken", res.data.accessToken);
       if (res.data.userData.id) {
@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     fetchUser();
   }, []);
-    useEffect(() => {
+  useEffect(() => {
     //console.log("User after logging put",user);
   }, [user]);
 
@@ -36,17 +36,16 @@ export const AuthProvider = ({ children }) => {
     setUser(response.data.user);
   };
 
-  const register = (response) =>{
+  const register = (response) => {
     localStorage.setItem("accessToken", response.data.accessToken);
     setUser(response.data.user);
-  }
+  };
 
   const logout = async () => {
     const { data } = await api.post("/auth/logout"); // backend clears cookie
     //console.log("LOGOUT",data)
     localStorage.removeItem("accessToken");
     setUser(null);
-    
   };
 
   return (
